@@ -5,14 +5,15 @@
 function generateLines(data, points) {
 
 	var colorAttribute = getObject(lineAttributes, "id",
-			"antigenic1");
+			"lineage");
 	
-	var startColor = colorbrewer.Paired[12][0];
-	var endColor = colorbrewer.Paired[12][3];
+//	var startColor = colorbrewer.Paired[12][0];
+//	var endColor = colorbrewer.Paired[12][3];
+
+	var colorscale = d3.scale.ordinal().range(colorbrewer.Dark2[8]).domain(colorAttribute.domain);
 	
-	
-	var colorscale = d3.scale.linear().domain(colorAttribute.range)
-	.range([startColor, endColor ]);
+//	var colorscale = d3.scale.linear().domain(colorAttribute.range)
+//	.range([startColor, endColor ]);
 
 	svg.append("g")
 	  .attr("class", "linesLegend")
@@ -29,7 +30,11 @@ function generateLines(data, points) {
 	svg.select(".linesLegend")
 	  .call(legendLinear);
 	
-	var opacityscale = d3.scale.linear().domain(colorAttribute.range)
+	
+	var opacityAttribute = getObject(lineAttributes, "id",
+	"height");
+	
+	var opacityscale = d3.scale.linear().domain(opacityAttribute.range)
 	.range([0.5, 1 ]);	
 	
 	var lines = linesLayer
