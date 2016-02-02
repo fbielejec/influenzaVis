@@ -182,5 +182,35 @@ function update(value, timeScale, currentDateDisplay, dateFormat) {
 	.attr("stroke-dashoffset", 0) //
 	.attr("visibility", "visible");
 
+	// ---POLYGONS---//
+
+	// ---select areas yet to be displayed---//
+
+	areasLayer.selectAll(".area") //
+	.filter(function(d) {
+		var polygon = this;
+		var startDate = formDate(polygon.attributes.startTime.value).getTime();
+
+		return (value < startDate);
+	}) //
+	.transition() //
+	.ease("linear") //
+	.duration(1000) //
+	.attr("visibility", "hidden");
+
+	// ---select polygons displayed now---//
+
+	areasLayer.selectAll(".area") //
+	.filter(function(d) {
+		var polygon = this;
+		var startDate = formDate(polygon.attributes.startTime.value).getTime();
+
+		return (value >= startDate);
+	}) //
+	.transition() //
+	.ease("linear") //
+//	.duration(1000) //
+	.attr("visibility", "visible");
+	
 }// END: update
 
