@@ -5,12 +5,12 @@
 function generateEmptyLayer(pointAttributes, axisAttributes) {
 
 	var xlim = getObject(pointAttributes, "id", axisAttributes.xCoordinate).range;
-	xlim = [ xlim[0] - 0, xlim[1] + 0 ];
+	xlim = [ xlim[0] - 5, xlim[1] + 2 ];
 
 	console.log(xlim[0])
 	
 	var ylim = getObject(pointAttributes, "id", axisAttributes.yCoordinate).range;
-	ylim = [ ylim[0] - padding.left, ylim[1] + padding.right ];
+	ylim = [ ylim[0] - 0, ylim[1] + 0 ];
 	
 	var bounds = [ xlim, ylim ];
 
@@ -55,7 +55,6 @@ function generateEmptyLayer(pointAttributes, axisAttributes) {
 
 	yAxisLayer.call(yAxis);
 
-	
 	// y axis title
 	svg.append("text") //
 	.attr("class", "y label") //
@@ -71,7 +70,6 @@ function generateEmptyLayer(pointAttributes, axisAttributes) {
 		'stroke-width' : '0.5px'
 	}) //
 	.text(capitalizeFirstLetter(axisAttributes.xCoordinate));
-	
 	
 	// define null projection
 	var zeroProjection = d3.geo.projection(function(x, y) {

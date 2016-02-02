@@ -57,6 +57,7 @@ var g = svg.append("g");
 var xAxisLayer = g.append("g").attr("class", "x axis");
 var yAxisLayer = g.append("g").attr("class", "y axis");
 
+var areasLayer = g.append("g").attr("class", "areasLayer");
 var linesLayer = g.append("g").attr("class", "linesLayer");
 var pointsLayer = g.append("g").attr("class", "pointsLayer");
 
@@ -106,6 +107,9 @@ d3.json("data/global_swine_H1.json", function ready(error, json) {
 	var axisAttributes = json.axisAttributes;
 	generateEmptyLayer(pointAttributes, axisAttributes);
 
+	var areas = json.layers[0].areas;
+		generateAreas(areas);
+	
 	var points = json.layers[0].points;
 	generatePoints(points);
 
