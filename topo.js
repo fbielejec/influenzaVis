@@ -5,11 +5,13 @@
 function generateEmptyLayer(pointAttributes, axisAttributes) {
 
 	var xlim = getObject(pointAttributes, "id", axisAttributes.xCoordinate).range;
-	xlim = [ xlim[0] - padding.left, xlim[1] + padding.right ];
+	xlim = [ xlim[0] - 0, xlim[1] + 0 ];
 
 	console.log(xlim[0])
 	
 	var ylim = getObject(pointAttributes, "id", axisAttributes.yCoordinate).range;
+	ylim = [ ylim[0] - padding.left, ylim[1] + padding.right ];
+	
 	var bounds = [ xlim, ylim ];
 
 	// maxX = xlim[0];
@@ -32,7 +34,7 @@ function generateEmptyLayer(pointAttributes, axisAttributes) {
 
 	// remove them 0's
 	g.selectAll(".tick").filter(function(d) {
-		return d === 0;
+		return d === -25;
 	}).remove();
 
 	// y axis (domain is swapped because of reverse coordinate order)

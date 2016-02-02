@@ -84,8 +84,8 @@ function move() {
 
 }// END: move
 
-d3.json("data/global_swine.H1_height_antig1.json", function ready(error, json) {
-//d3.json("data/global_swine_H1.json", function ready(error, json) {
+//d3.json("data/global_swine.H1_height_antig1.json", function ready(error, json) {
+d3.json("data/global_swine_H1.json", function ready(error, json) {
 
 	lineAttributes = json.lineAttributes;
 	
