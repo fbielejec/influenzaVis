@@ -19,22 +19,23 @@ function generateLines(data, points) {
 	var colorscale = d3.scale.linear().domain(heightAttribute.range)
 	.range([lineStartColor, lineEndColor ]);
 
+	// TODO: legend
 	///////////////////////////
 	
-	svg.append("g")
-	  .attr("class", "legendLinear")
-//	  .attr("transform", "translate(20,20)");
-	.attr("transform", "translate(" + (0 + 25) + "," + (0) + ")");
-	
-	
-	var legendLinear = d3.legend.color()
-	  .shapeWidth(60)
-	    .cells(10)
-	  .orient('horizontal')
-	  .scale(colorscale);
-
-	svg.select(".legendLinear")
-	  .call(legendLinear);
+//	svg.append("g")
+//	  .attr("class", "legendLinear")
+////	  .attr("transform", "translate(20,20)");
+//	.attr("transform", "translate(" + (0 + 25) + "," + (0) + ")");
+//	
+//	
+//	var legendLinear = d3.legend.color()
+//	  .shapeWidth(60)
+//	    .cells(10)
+//	  .orient('horizontal')
+//	  .scale(colorscale);
+//
+//	svg.select(".legendLinear")
+//	  .call(legendLinear);
 	
 	///////////////////////////
 	

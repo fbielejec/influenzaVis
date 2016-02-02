@@ -29,3 +29,8 @@ function formDate(dateString) {
 
 	return (date);
 }// END: formDate
+
+function map(value, fromLow, fromHigh, toLow, toHigh) {
+	return (toLow + (toHigh - toLow)
+			* ((value - fromLow) / (fromHigh - fromLow)));
+}// END: map

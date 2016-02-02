@@ -10,6 +10,9 @@
 <script type="text/javascript" src="lib/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="lib/colorbrewer.js"></script>
 <script type="text/javascript" src="lib/d3-legend.js"></script>
+<script type="text/javascript" src="lib/d3.slider/d3.slider.js"></script>
+<link rel="stylesheet" href="lib/d3.slider/d3.slider.css" />
+
 
 <!-- scripts -->
 <script type="text/javascript" src="points.js"></script>
@@ -30,12 +33,44 @@
     display: none;
 }
 
+#timeSlider {
+	margin-left: 80px;
+	margin-right: 5px;
+}
+
+.playPause {
+	float: left;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #CCCCCC;
+	border-radius: 5px;
+	width: 40px;
+	height: 40px;
+	/*  position: absolute; */
+	background: url('img/play.png');
+}
+
+.playPause.playing {
+	background: url('img/pause.png');
+}
+
 </style>
 
 </head>
 
 <!-- object wrapping prevents shadowing effect of parental scope -->
 <body>
+
+		<div id="controls">
+			<h2>
+				Current date: <span id="currentDate"> 0 </span>
+			</h2>
+			<!-- 			<div id="wrapper" style="display: block;"> -->
+			<div>
+				<div id="playPause"></div>
+				<div id="timeSlider"></div>
+			</div>
+		</div>
 
     <div id="container"></div>
 

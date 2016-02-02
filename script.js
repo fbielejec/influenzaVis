@@ -25,9 +25,23 @@ var height = 600 - margin.top - margin.bottom;
 
 var minScaleExtent = 1;//0.7;
 var maxScaleExtent = 5;
+//var sliderStartValue;
+//var sliderEndValue;
+var lineWidth = 2;
+
+
+//time slider
+var playing = false;
+var processID;
+var currentSliderValue;
+var sliderInterval;
 var sliderStartValue;
 var sliderEndValue;
-var lineWidth = 2;
+var timeSlider;
+var timeScale;
+var currentDateDisplay ;
+var dateFormat;
+
 
 var zoom = d3.behavior.zoom().scaleExtent([ minScaleExtent, maxScaleExtent ])
 		.center([ width / 2, height / 2 ]).size([ width, height ]).on("zoom",
@@ -79,6 +93,15 @@ d3.json("data/global_swine.H1_height_antig1.json", function ready(error, json) {
 	var timeline = json.timeLine;
 	generateTime(timeline);
 
+	initializeTimeSlider(timeSlider, timeScale, currentDateDisplay,
+			dateFormat);
+
+	// put slider at the end of timeLine, everything painted
+	timeSlider.value(sliderEndValue);
+
+	updateDateDisplay(sliderEndValue, timeScale, currentDateDisplay,
+			dateFormat);
+	
 	var pointAttributes = json.pointAttributes;
 	var axisAttributes = json.axisAttributes;
 	generateEmptyLayer(pointAttributes, axisAttributes);
