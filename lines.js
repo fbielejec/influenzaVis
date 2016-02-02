@@ -4,42 +4,37 @@
 
 function generateLines(data, points) {
 
-	// bend values in [0,1]
-	// 0 gives straight lines, closer to 1 results in more bent lines
-//	var scale = d3.scale.linear().domain([ sliderEndValue, sliderStartValue ])
-//			.range([ 0, 1 ]);
-
-	
-	var heightAttribute = getObject(lineAttributes, "id",
+	var colorAttribute = getObject(lineAttributes, "id",
 			"height");
 	
-	var lineStartColor = colorbrewer.RdYlGn[11][0];
-	var lineEndColor = colorbrewer.RdYlGn[11][10];
+	var startColor = "rgb(46, 73, 123)";//colorbrewer.RdYlGn[11][0];
+	var endColor = "rgb(71, 187, 94)";//colorbrewer.RdYlGn[11][10];
 	
-	var colorscale = d3.scale.linear().domain(heightAttribute.range)
-	.range([lineStartColor, lineEndColor ]);
+	
+	var colorscale = d3.scale.linear().domain(colorAttribute.range)
+	.range([startColor, endColor ]);
 
 	// TODO: legend
 	///////////////////////////
 	
-//	svg.append("g")
-//	  .attr("class", "legendLinear")
-////	  .attr("transform", "translate(20,20)");
-//	.attr("transform", "translate(" + (0 + 25) + "," + (0) + ")");
-//	
-//	
-//	var legendLinear = d3.legend.color()
-//	  .shapeWidth(60)
-//	    .cells(10)
-//	  .orient('horizontal')
-//	  .scale(colorscale);
-//
-//	svg.select(".legendLinear")
-//	  .call(legendLinear);
+	svg.append("g")
+	  .attr("class", "linesLegend")
+	.attr("transform", "translate(" + (width) + "," + (0 + 50) + ")");
+	
+	
+	var legendLinear = d3.legend.color()
+	  .shapeWidth(30)
+	    .cells(5)
+	  .orient('vertical')
+	    .title(capitalizeFirstLetter(colorAttribute.id))
+	  .scale(colorscale);
+
+	svg.select(".linesLegend")
+	  .call(legendLinear);
 	
 	///////////////////////////
 	
-	var opacityscale = d3.scale.linear().domain(heightAttribute.range)
+	var opacityscale = d3.scale.linear().domain(colorAttribute.range)
 	.range([0.5, 1 ]);	
 	
 	var lines = linesLayer
@@ -102,7 +97,6 @@ function generateLines(data, points) {
 							
 						}
 
-						
 						var startLatitude = startCoordinate.xCoordinate;
 						var startLongitude = startCoordinate.yCoordinate;
 
@@ -119,32 +113,19 @@ function generateLines(data, points) {
 						var targetX = targetXY[0];
 						var targetY = targetXY[1];
 
-//						console.log(curvature)
-						
 						var dx = targetX - sourceX;
 						var dy = targetY - sourceY;
-						var dr = Math.sqrt(dx * dx + dy * dy) * curvature;
+						var dr = 0;
 
-						var westofsource = (targetX - sourceX) < 0;
-						line['westofsource'] = westofsource;
-						line['targetX'] = targetX;
-						line['targetY'] = targetY;
-						line['sourceX'] = sourceX;
-						line['sourceY'] = sourceY;
+//						line['targetX'] = targetX;
+//						line['targetY'] = targetY;
+//						line['sourceX'] = sourceX;
+//						line['sourceY'] = sourceY;
 
-						var bearing;
-						if (westofsource) {
-							bearing = "M" + targetX + "," + targetY + "A" + dr
-									+ "," + dr + " 0 0,1 " + sourceX + ","
-									+ sourceY;
-
-						} else {
-
-							bearing = "M" + sourceX + "," + sourceY + "A" + dr
+						var bearing = "M" + sourceX + "," + sourceY + "A" + dr
 									+ "," + dr + " 0 0,1 " + targetX + ","
 									+ targetY;
 
-						}
 
 						return (bearing);
 

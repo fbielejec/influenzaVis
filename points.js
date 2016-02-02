@@ -4,6 +4,38 @@
 
 function generatePoints(data) {
 
+	
+	var colorAttribute = getObject(lineAttributes, "id",
+	"antigenic2");
+	
+	var startColor = colorbrewer.YlOrRd[9][2];
+	var endColor = colorbrewer.YlOrRd[9][7];
+	
+//	console.log(startColor);
+//	console.log(endColor);
+	
+	var colorscale = d3.scale.linear().domain(colorAttribute.range)
+	.range([startColor, endColor ]);
+	
+	
+	svg.append("g")
+	  .attr("class", "pointsLegend")
+	.attr("transform", "translate(" + (width) + "," + (height/2) + ")");
+	
+	
+	var legendLinear = d3.legend.color()
+	  .shapeWidth(30)
+	    .cells(5)
+	     .title(capitalizeFirstLetter(colorAttribute.id))
+	  .orient('vertical')
+	  .scale(colorscale);
+
+	svg.select(".pointsLegend")
+	  .call(legendLinear);
+	
+	
+	
+	
 	var points = pointsLayer.selectAll("circle").data(data).enter().append(
 			"circle") //
 	.attr("class", "point") //
@@ -55,7 +87,12 @@ function generatePoints(data) {
 				return (cy);
 			}) //
 	.attr("r", 2.5) //
-	.attr("fill", "red") //
+	.attr("fill", function(d) {
+		
+		return (colorscale(+d.attributes.antigenic2) );
+		
+		
+	}) //
 	.attr("stroke", "black");
 
 	// dump attribute values into DOM
