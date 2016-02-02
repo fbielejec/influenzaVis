@@ -14,9 +14,6 @@ function generateLines(data, points) {
 	var colorscale = d3.scale.linear().domain(colorAttribute.range)
 	.range([startColor, endColor ]);
 
-	// TODO: legend
-	///////////////////////////
-	
 	svg.append("g")
 	  .attr("class", "linesLegend")
 	.attr("transform", "translate(" + (width) + "," + (0 + 50) + ")");
@@ -31,8 +28,6 @@ function generateLines(data, points) {
 
 	svg.select(".linesLegend")
 	  .call(legendLinear);
-	
-	///////////////////////////
 	
 	var opacityscale = d3.scale.linear().domain(colorAttribute.range)
 	.range([0.5, 1 ]);	
