@@ -5,6 +5,7 @@
 // ---GLOBAL DEFINES---//
 
 var lineAttributes;
+var pointAttributes; 
 
 var projection;
 
@@ -89,8 +90,10 @@ function move() {
 d3.json("data/global_swine_H1.json", function ready(error, json) {
 
 	lineAttributes = json.lineAttributes;
+    pointAttributes = json.pointAttributes;
 	
-	
+    console.log(pointAttributes);
+    
 	var timeline = json.timeLine;
 	generateTime(timeline);
 

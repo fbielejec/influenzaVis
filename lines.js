@@ -88,7 +88,7 @@ function generateLines(data, points) {
 							curvature = 0;//scale(formDate(line.startTime));
 
 						} else {
-							curvature = lineMaxCurvature;
+							curvature = 0;//lineMaxCurvature;
 							
 						}
 
