@@ -5,18 +5,15 @@
 function generateLines(data, points) {
 
 	var colorAttribute = getObject(lineAttributes, "id",
-			"height");
+			"antigenic1");
 	
-	var startColor = "rgb(46, 73, 123)";//colorbrewer.RdYlGn[11][0];
-	var endColor = "rgb(71, 187, 94)";//colorbrewer.RdYlGn[11][10];
+	var startColor = colorbrewer.Paired[12][0];
+	var endColor = colorbrewer.Paired[12][3];
 	
 	
 	var colorscale = d3.scale.linear().domain(colorAttribute.range)
 	.range([startColor, endColor ]);
 
-	// TODO: legend
-	///////////////////////////
-	
 	svg.append("g")
 	  .attr("class", "linesLegend")
 	.attr("transform", "translate(" + (width) + "," + (0 + 50) + ")");
@@ -31,8 +28,6 @@ function generateLines(data, points) {
 
 	svg.select(".linesLegend")
 	  .call(legendLinear);
-	
-	///////////////////////////
 	
 	var opacityscale = d3.scale.linear().domain(colorAttribute.range)
 	.range([0.5, 1 ]);	

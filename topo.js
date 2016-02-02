@@ -5,11 +5,13 @@
 function generateEmptyLayer(pointAttributes, axisAttributes) {
 
 	var xlim = getObject(pointAttributes, "id", axisAttributes.xCoordinate).range;
-	xlim = [ xlim[0] - padding.left, xlim[1] + padding.right ];
+	xlim = [ xlim[0] - 0, xlim[1] + 0 ];
 
 	console.log(xlim[0])
 	
 	var ylim = getObject(pointAttributes, "id", axisAttributes.yCoordinate).range;
+	ylim = [ ylim[0] - padding.left, ylim[1] + padding.right ];
+	
 	var bounds = [ xlim, ylim ];
 
 	// maxX = xlim[0];
@@ -20,7 +22,7 @@ function generateEmptyLayer(pointAttributes, axisAttributes) {
 	scale = (hscale < vscale) ? hscale : vscale;
 	scale = scale * 150;
 
-	// x axis (domain is swapped because of reverse coordinate order)
+	// x axis (domain swapped because of reverse coordinate order)
 	var xScale = d3.scale.linear().domain(ylim).nice().range([ 0, width ]);
 
 	var xAxis = d3.svg.axis().scale(xScale).orient("bottom");
@@ -30,9 +32,20 @@ function generateEmptyLayer(pointAttributes, axisAttributes) {
 	xAxisLayer
 	.attr("transform", "translate(0," + height + ")").call(xAxis);
 
+	// x axis title
+	g.append("text").attr("class", "x label").attr("text-anchor", "middle")
+	.attr("x", width / 2).attr("y", height + margin.bottom - 10).style(
+			"font-size", "18px") //
+	.style({
+		'stroke' : 'Black',
+		'fill' : 'Black',
+		'stroke-width' : '0.5px'
+	}).text(capitalizeFirstLetter(axisAttributes.yCoordinate));
+	
+	
 	// remove them 0's
 	g.selectAll(".tick").filter(function(d) {
-		return d === 0;
+		return d === -25;
 	}).remove();
 
 	// y axis (domain is swapped because of reverse coordinate order)
@@ -42,6 +55,28 @@ function generateEmptyLayer(pointAttributes, axisAttributes) {
 
 	yAxisLayer.call(yAxis);
 
+	
+	// y axis title
+//	g.append("text") //
+//	.attr("class", "y label") //
+//	.attr("text-anchor", "middle") //
+//	.attr("x", -50)
+//	.attr("y", height/2)
+//		.attr(
+//			"transform",
+//			"rotate(-90)") //
+////	.attr(
+////			"transform",
+////			"translate(" + (0 - margin.left / 2) + "," + (height / 2)
+////					+ ")rotate(-90)") //
+//	.style("font-size", "13px") //
+//	.style({
+//		'stroke' : 'Black',
+//		'fill' : 'Black',
+//		'stroke-width' : '0.5px'
+//	}).text(capitalizeFirstLetter(axisAttributes.xCoordinate));
+	
+	
 	// define null projection
 	var zeroProjection = d3.geo.projection(function(x, y) {
 		return [ x, y ];
