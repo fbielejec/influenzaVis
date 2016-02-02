@@ -7,7 +7,6 @@ function generateEmptyLayer(pointAttributes, axisAttributes) {
 	var xlim = getObject(pointAttributes, "id", axisAttributes.xCoordinate).range;
 	xlim = [ xlim[0] - 5, xlim[1] + 2 ];
 
-	console.log(xlim[0])
 	
 	var ylim = getObject(pointAttributes, "id", axisAttributes.yCoordinate).range;
 	ylim = [ ylim[0] - 0, ylim[1] + 0 ];
@@ -25,6 +24,7 @@ function generateEmptyLayer(pointAttributes, axisAttributes) {
 	// x axis (domain swapped because of reverse coordinate order)
 	var xScale = d3.scale.linear().domain(ylim).nice().range([ 0, width ]);
 
+	
 	var xAxis = d3.svg.axis().scale(xScale).orient("bottom");
 
 	// add the x axis
@@ -45,7 +45,7 @@ function generateEmptyLayer(pointAttributes, axisAttributes) {
 	
 	// remove them 0's
 	g.selectAll(".tick").filter(function(d) {
-		return d === -25;
+		return d === xScale.domain()[0];
 	}).remove();
 
 	// y axis (domain is swapped because of reverse coordinate order)

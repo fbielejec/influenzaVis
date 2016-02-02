@@ -4,7 +4,9 @@
 
 function generatePoints(data) {
 
+	console.log(pointAttributes);
 	
+	// color
 	var colorAttribute = getObject(lineAttributes, "id",
 	"antigenic2");
 	
@@ -17,11 +19,9 @@ function generatePoints(data) {
 	var colorscale = d3.scale.linear().domain(colorAttribute.range)
 	.range([startColor, endColor ]);
 	
-	
 	svg.append("g")
-	  .attr("class", "pointsLegend")
-	.attr("transform", "translate(" + (width) + "," + (height/2) + ")");
-	
+	  .attr("class", "pointsColorLegend")
+	.attr("transform", "translate(" + (width) + "," + (height/2 - 50) + ")");
 	
 	var legendLinear = d3.legend.color()
 	  .shapeWidth(30)
@@ -30,8 +30,37 @@ function generatePoints(data) {
 	  .orient('vertical')
 	  .scale(colorscale);
 
-	svg.select(".pointsLegend")
+	svg.select(".pointsColorLegend")
 	  .call(legendLinear);
+	
+
+	// size
+	var sizeAttribute = getObject(lineAttributes, "id",
+	"posterior");
+	
+	var sizeScale = d3.scale.linear().domain(sizeAttribute.range)
+	.range([1.5, 5 ]);	
+	
+	
+	
+	svg.append("g")
+	  .attr("class", "pointsSizeLegend")
+	.attr("transform", "translate(" + (width) + "," + (height/2 + 110) + ")");
+	
+	var legendSize = d3.legend.size()
+	  .scale(sizeScale)
+	  .shape('circle')
+	  .shapePadding(15)
+	  .labelOffset(20)
+	  .orient('vertical')
+	  .title(capitalizeFirstLetter(sizeAttribute.id));
+
+	svg.select(".pointsSizeLegend")
+	  .call(legendSize);
+	
+	
+	
+	
 	
 	
 	
@@ -86,7 +115,11 @@ function generatePoints(data) {
 				var cy = xy[1]; // long
 				return (cy);
 			}) //
-	.attr("r", 2.5) //
+	.attr("r", function(d) {
+		
+		return(sizeScale(+d.attributes.posterior))
+		
+	}) //
 	.attr("fill", function(d) {
 		
 		return (colorscale(+d.attributes.antigenic2) );
@@ -96,18 +129,18 @@ function generatePoints(data) {
 	.attr("stroke", "black");
 
 	// dump attribute values into DOM
-	points[0].forEach(function(d, i) {
-
-		var thisPoint = d3.select(d);
-		var properties = data[i].attributes;
-
-		for ( var property in properties) {
-			if (properties.hasOwnProperty(property)) {
-
-				thisPoint.attr(property, properties[property]);
-
-			}
-		}// END: properties loop
-	});
+//	points[0].forEach(function(d, i) {
+//
+//		var thisPoint = d3.select(d);
+//		var properties = data[i].attributes;
+//
+//		for ( var property in properties) {
+//			if (properties.hasOwnProperty(property)) {
+//
+//				thisPoint.attr(property, properties[property]);
+//
+//			}
+//		}// END: properties loop
+//	});
 
 }// END: generatePoints
