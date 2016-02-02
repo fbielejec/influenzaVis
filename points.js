@@ -8,38 +8,39 @@ function generatePoints(data) {
 	
 	// color
 	var colorAttribute = getObject(lineAttributes, "id",
-	"antigenic2");
+	"lineage");
 	
-	var startColor = colorbrewer.YlOrRd[9][2];
-	var endColor = colorbrewer.YlOrRd[9][7];
+//	var startColor = colorbrewer.YlOrRd[9][2];
+//	var endColor = colorbrewer.YlOrRd[9][7];
 	
 //	console.log(startColor);
 //	console.log(endColor);
 	
-	var colorscale = d3.scale.linear().domain(colorAttribute.range)
-	.range([startColor, endColor ]);
+	var colorscale = d3.scale.ordinal().range(colorbrewer.Dark2[8]).domain(colorAttribute.domain);
 	
-	svg.append("g")
-	  .attr("class", "pointsColorLegend")
-	.attr("transform", "translate(" + (width) + "," + (height/2 - 50) + ")");
+//		d3.scale.linear().domain(colorAttribute.range).range([startColor, endColor ]);
 	
-	var legendLinear = d3.legend.color()
-	  .shapeWidth(30)
-	    .cells(5)
-	     .title(capitalizeFirstLetter(colorAttribute.id))
-	  .orient('vertical')
-	  .scale(colorscale);
-
-	svg.select(".pointsColorLegend")
-	  .call(legendLinear);
+//	svg.append("g")
+//	  .attr("class", "pointsColorLegend")
+//	.attr("transform", "translate(" + (width) + "," + (height/2 - 50) + ")");
+//	
+//	var legendLinear = d3.legend.color()
+//	  .shapeWidth(30)
+//	    .cells(5)
+//	     .title(capitalizeFirstLetter(colorAttribute.id))
+//	  .orient('vertical')
+//	  .scale(colorscale);
+//
+//	svg.select(".pointsColorLegend")
+//	  .call(legendLinear);
 	
 
 	// size
 	var sizeAttribute = getObject(lineAttributes, "id",
-	"posterior");
+	"antigenic3");
 	
 	var sizeScale = d3.scale.linear().domain(sizeAttribute.range)
-	.range([1.5, 5 ]);	
+	.range([7, 1 ]);	
 	
 	
 	
@@ -117,12 +118,12 @@ function generatePoints(data) {
 			}) //
 	.attr("r", function(d) {
 		
-		return(sizeScale(+d.attributes.posterior))
+		return(sizeScale(+d.attributes.antigenic3))
 		
 	}) //
 	.attr("fill", function(d) {
 		
-		return (colorscale(+d.attributes.antigenic2) );
+		return (colorscale(d.attributes.lineage) );
 		
 		
 	}) //

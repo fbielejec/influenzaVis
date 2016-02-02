@@ -5,11 +5,11 @@
 function generateEmptyLayer(pointAttributes, axisAttributes) {
 
 	var xlim = getObject(pointAttributes, "id", axisAttributes.xCoordinate).range;
-	xlim = [ xlim[0] - 5, xlim[1] + 2 ];
+	xlim = [ xlim[0] - 2, xlim[1] + 2 ];
 
 	
 	var ylim = getObject(pointAttributes, "id", axisAttributes.yCoordinate).range;
-	ylim = [ ylim[0] - 0, ylim[1] + 0 ];
+	ylim = [ ylim[0] - 2, ylim[1] + 2 ];
 	
 	var bounds = [ xlim, ylim ];
 
@@ -56,7 +56,7 @@ function generateEmptyLayer(pointAttributes, axisAttributes) {
 	yAxisLayer.call(yAxis);
 
 	// y axis title
-	svg.append("text") //
+	g.append("text") //
 	.attr("class", "y label") //
 	.attr("text-anchor", "middle") //
 	.attr(

@@ -21,8 +21,8 @@ var padding  = {
 		right : 10
 };
 
-var width = 1500 - margin.left - margin.right;
-var height = 600 - margin.top - margin.bottom;
+var width = 900 - margin.left - margin.right;
+var height = 900 - margin.top - margin.bottom;
 
 var minScaleExtent = 1;//0.7;
 var maxScaleExtent = 5;
