@@ -57,24 +57,20 @@ function generateEmptyLayer(pointAttributes, axisAttributes) {
 
 	
 	// y axis title
-//	g.append("text") //
-//	.attr("class", "y label") //
-//	.attr("text-anchor", "middle") //
-//	.attr("x", -50)
-//	.attr("y", height/2)
-//		.attr(
-//			"transform",
-//			"rotate(-90)") //
-////	.attr(
-////			"transform",
-////			"translate(" + (0 - margin.left / 2) + "," + (height / 2)
-////					+ ")rotate(-90)") //
-//	.style("font-size", "13px") //
-//	.style({
-//		'stroke' : 'Black',
-//		'fill' : 'Black',
-//		'stroke-width' : '0.5px'
-//	}).text(capitalizeFirstLetter(axisAttributes.xCoordinate));
+	svg.append("text") //
+	.attr("class", "y label") //
+	.attr("text-anchor", "middle") //
+	.attr(
+			"transform",
+			"translate(" + (0 + margin.left - 10) + "," + (height / 2)
+					+ ")rotate(-90)") //
+	.style("font-size", "18px") //
+	.style({
+		'stroke' : 'Black',
+		'fill' : 'Black',
+		'stroke-width' : '0.5px'
+	}) //
+	.text(capitalizeFirstLetter(axisAttributes.xCoordinate));
 	
 	
 	// define null projection
