@@ -1,0 +1,94 @@
+/**
+ * @fbielejec
+ */
+
+// ---GLOBAL DEFINES---//
+
+var lineAttributes;
+
+var projection;
+
+var margin = {
+	top : 20,
+	right : 50,
+	bottom : 50,
+	left : 50,
+};
+
+var padding  = {
+		left: 10,
+		right : 10
+};
+
+var width = 1500 - margin.left - margin.right;
+var height = 600 - margin.top - margin.bottom;
+
+var minScaleExtent = 1;//0.7;
+var maxScaleExtent = 5;
+var sliderStartValue;
+var sliderEndValue;
+var lineWidth = 2;
+
+var zoom = d3.behavior.zoom().scaleExtent([ minScaleExtent, maxScaleExtent ])
+		.center([ width / 2, height / 2 ]).size([ width, height ]).on("zoom",
+				move);
+
+var svg = d3.select("#container").append('svg') //
+.attr("width", width + margin.left + margin.right) //
+.attr("height", height + margin.top + margin.bottom) //
+.call(zoom);
+
+var g = svg.append("g");
+
+var xAxisLayer = g.append("g").attr("class", "x axis");
+var yAxisLayer = g.append("g").attr("class", "y axis");
+
+var linesLayer = g.append("g").attr("class", "linesLayer");
+var pointsLayer = g.append("g").attr("class", "pointsLayer");
+
+// ---FUNCTIONS---//
+
+function move() {
+
+	var t = d3.event.translate;
+	var s = d3.event.scale;
+	var h = height / 4;
+
+	t[0] = Math
+			.min((width / height) * (s - 1), Math.max(width * (1 - s), t[0]));
+
+	t[1] = Math.min(h * (s - 1) + h * s, Math.max(height * (1 - s) - h * s,
+			t[1]));
+
+	zoom.translate(t);
+	g.attr("transform", "translate(" + t + ")scale(" + s + ")");
+
+	// fit the paths to the zoom level
+	// d3.selectAll(".country").attr("stroke-width", 1.0 / s);
+	// d3.selectAll(".line").attr("stroke-width", lineWidth / s);
+	// d3.selectAll(".point").attr("stroke-width", 1.0 / s);
+
+}// END: move
+
+d3.json("data/global_swine.H1_height_antig1.json", function ready(error, json) {
+//d3.json("data/global_swine_H1.json", function ready(error, json) {
+
+	lineAttributes = json.lineAttributes;
+	
+	
+	var timeline = json.timeLine;
+	generateTime(timeline);
+
+	var pointAttributes = json.pointAttributes;
+	var axisAttributes = json.axisAttributes;
+	generateEmptyLayer(pointAttributes, axisAttributes);
+
+	var points = json.layers[0].points;
+	generatePoints(points);
+
+	var lines = json.layers[0].lines;
+	generateLines(lines, points);
+
+});// END: d3.json
+
+console.log("Done!");

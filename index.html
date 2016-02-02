@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Influenza Antigenic Dynamics</title>
+
+<!-- libs -->
+<script type="text/javascript" src="lib/d3.min.js"></script>
+<!-- <script type="text/javascript" src="lib/angular.min.js"></script> -->
+<script type="text/javascript" src="lib/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="lib/colorbrewer.js"></script>
+<script type="text/javascript" src="lib/d3-legend.js"></script>
+
+<!-- scripts -->
+<script type="text/javascript" src="points.js"></script>
+<script type="text/javascript" src="topo.js"></script>
+<script type="text/javascript" src="utils.js"></script>
+<script type="text/javascript" src="lines.js"></script>
+<script type="text/javascript" src="time.js"></script>
+
+<!-- css -->
+<style type="text/css">
+.axis path, .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.x.axis path {
+    display: none;
+}
+
+</style>
+
+</head>
+
+<!-- object wrapping prevents shadowing effect of parental scope -->
+<body>
+
+    <div id="container"></div>
+
+    <script type="text/javascript" src="script.js"></script>
+
+
+</body>
+</html>
