@@ -34,3 +34,7 @@ function map(value, fromLow, fromHigh, toLow, toHigh) {
 	return (toLow + (toHigh - toLow)
 			* ((value - fromLow) / (fromHigh - fromLow)));
 }// END: map
+
+function capitalizeFirstLetter(string) {
+    return string[0].toUpperCase() + string.slice(1);
+}
