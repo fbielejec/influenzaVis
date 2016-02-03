@@ -150,6 +150,11 @@ function generateLines(data, points) {
 			.attr("stroke-linejoin", "round")
 			//
 			.attr("stroke", function(d) {
+				
+				if(typeof(d.attributes.lineage) == "undefined") {
+					return("grey");
+				}
+				
 				return (colorscale(d.attributes.lineage) );
 			})
 			//

@@ -137,6 +137,12 @@ function generatePoints(data, pointAttributes) {
 	}) //
 	.attr("fill", function(d) {
 		
+//		console.log(d.attributes.lineage);
+		
+		if(typeof(d.attributes.lineage) == "undefined") {
+			return("grey");
+		}
+		
 		return (colorscale(d.attributes.lineage) );
 		
 		
@@ -171,6 +177,11 @@ function generatePoints(data, pointAttributes) {
 			{
 				title : 'Antigenic3',
 				value : (d.attributes.antigenic3).toFixed(2)
+			},//
+			
+			{
+				title : 'Lineage',
+				value : d.attributes.lineage
 			}
 			
 			]
