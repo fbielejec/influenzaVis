@@ -30,12 +30,12 @@ d3.kodama
 					}
 				});
 
-function generatePoints(data) {
+function generatePoints(data, pointAttributes) {
 
-	console.log(pointAttributes);
+//	console.log(pointAttributes);
 	
 	// color
-	var colorAttribute = getObject(lineAttributes, "id",
+	var colorAttribute = getObject(pointAttributes, "id",
 	"lineage");
 	
 //	var startColor = colorbrewer.YlOrRd[9][2];
@@ -43,28 +43,14 @@ function generatePoints(data) {
 	
 //	console.log(startColor);
 //	console.log(endColor);
+
 	
-	var colorscale = d3.scale.ordinal().range(colorbrewer.Dark2[8]).domain(colorAttribute.domain);
-	
-//		d3.scale.linear().domain(colorAttribute.range).range([startColor, endColor ]);
-	
-//	svg.append("g")
-//	  .attr("class", "pointsColorLegend")
-//	.attr("transform", "translate(" + (width) + "," + (height/2 - 50) + ")");
-//	
-//	var legendLinear = d3.legend.color()
-//	  .shapeWidth(30)
-//	    .cells(5)
-//	     .title(capitalizeFirstLetter(colorAttribute.id))
-//	  .orient('vertical')
-//	  .scale(colorscale);
-//
-//	svg.select(".pointsColorLegend")
-//	  .call(legendLinear);
-	
+	var h1cols = [ "#CD322E", "#D6D6E2", "#2481BA", "#89A24C", "#835B9C" ]; //= colorbrewer.Dark2[8]
+	var colorscale = d3.scale.ordinal().range( h1cols ).domain(colorAttribute.domain);
+
 
 	// size
-	var sizeAttribute = getObject(lineAttributes, "id",
+	var sizeAttribute = getObject(pointAttributes, "id",
 	"antigenic3");
 	
 	var sizeScale = d3.scale.linear().domain(sizeAttribute.range)
@@ -173,7 +159,7 @@ function generatePoints(data) {
 	.call(d3.kodama.tooltip().format(function(d, i) {
 
 		return {
-			title : "", //d.location.id,
+			title : d.attributes.nodeName,
 			items : [ {
 				title : 'Antigenic1',
 				value : (d.attributes.antigenic1).toFixed(2)

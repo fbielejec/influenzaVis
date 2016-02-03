@@ -10,19 +10,17 @@ var pointAttributes;
 //var projection;
 
 var margin = {
-	top : 20,
+	top : 30,
 	right : 50,
-	bottom : 10,
+	bottom : 50,
 	left : 200,
 };
+//
+//var width = 1100 - margin.left - margin.right;
+//var height =width;//= 900 - margin.top - margin.bottom;
 
-var padding  = {
-		left: 10,
-		right : 10
-};
-
-var width = 1100 - margin.left - margin.right;
-var height = 900 - margin.top - margin.bottom;
+width = 1100 - margin.left - margin.right,
+height = 1100 - margin.top - margin.bottom;
 
 var minScaleExtent = 1;//0.7;
 var maxScaleExtent = 5;
@@ -91,7 +89,7 @@ d3.json("data/global_swine.H1.json", function ready(error, json) {
 	lineAttributes = json.lineAttributes;
     pointAttributes = json.pointAttributes;
 	
-    console.log(pointAttributes);
+//    console.log(pointAttributes);
     
 	var timeline = json.timeLine;
 	generateTime(timeline);
@@ -113,7 +111,7 @@ d3.json("data/global_swine.H1.json", function ready(error, json) {
 //		generateAreas(areas);
 	
 	var points = json.layers[0].points;
-	generatePoints(points);
+	generatePoints(points, pointAttributes);
 
 	var lines = json.layers[0].lines;
 	generateLines(lines, points);

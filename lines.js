@@ -10,7 +10,16 @@ function generateLines(data, points) {
 //	var startColor = colorbrewer.Paired[12][0];
 //	var endColor = colorbrewer.Paired[12][3];
 
-	var colorscale = d3.scale.ordinal().range(colorbrewer.Dark2[8]).domain(colorAttribute.domain);
+//	2009_pandemic_1A	#CD322E
+//	human_seasonal_H1	#D6D6E2
+//	classical_swine_1A	#2481BA
+//	eurasian_avian-like_1C	#89A24C
+//	human_seasonal_H1-like_1B	#835B9C
+//	2009_pandemic_1A_human	#E38886
+	
+	
+	var h1cols = [ "#CD322E", "#D6D6E2", "#2481BA", "#89A24C", "#835B9C" ]; //= colorbrewer.Dark2[8]
+	var colorscale = d3.scale.ordinal().range( h1cols ).domain(colorAttribute.domain);
 	
 //	var colorscale = d3.scale.linear().domain(colorAttribute.range)
 //	.range([startColor, endColor ]);

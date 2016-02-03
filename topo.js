@@ -26,7 +26,10 @@ function generateEmptyLayer(pointAttributes, axisAttributes) {
 	var xScale = d3.scale.linear().domain(ylim).nice().range([ 0, width ]);
 
 	
-	var xAxis = d3.svg.axis().scale(xScale).orient("bottom");
+	var xAxis = d3.svg.axis().scale(xScale).orient("bottom")
+    .innerTickSize(-height)
+    .outerTickSize(0)
+	;
 
 	// add the x axis
 //	g.append("g")
@@ -52,7 +55,10 @@ function generateEmptyLayer(pointAttributes, axisAttributes) {
 	// y axis (domain is swapped because of reverse coordinate order)
 	var yScale = d3.scale.linear().domain(ylim).nice().range([ height, 0 ]);
 
-	var yAxis = d3.svg.axis().scale(yScale).orient("right");
+	var yAxis = d3.svg.axis().scale(yScale).orient("left")
+	.innerTickSize(-width)
+    .outerTickSize(0)
+	;
 
 	yAxisLayer.call(yAxis);
 
@@ -102,24 +108,24 @@ function generateEmptyLayer(pointAttributes, axisAttributes) {
 
 	
 	
-	
-	
+//	try this instead of graticules
+//	http://bl.ocks.org/hunzy/11110940
 	
 	// graticules
-	var graticule = d3.geo.graticule();
-	
-	path = d3.geo.path().projection(projection);
-
-	svg.append("path").datum(graticule).attr("class", "graticule").attr("d",
-			path);
-	
-	// apply inline style
-	svg.selectAll('.graticule').style({
-		'stroke' : '#bbb',
-		'fill' : 'none',
-		'stroke-width' : '.5px',
-			'stroke-opacity' : '.5'
-	});
+//	var graticule = d3.geo.graticule();
+//	
+//	path = d3.geo.path().projection(projection);
+//
+//	svg.append("path").datum(graticule).attr("class", "graticule").attr("d",
+//			path);
+//	
+//	// apply inline style
+//	svg.selectAll('.graticule').style({
+//		'stroke' : '#bbb',
+//		'fill' : 'none',
+//		'stroke-width' : '.5px',
+//			'stroke-opacity' : '.5'
+//	});
 	
 	
 //	svg.selectAll('text')
