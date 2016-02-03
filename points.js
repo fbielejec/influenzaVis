@@ -35,7 +35,7 @@ function generatePoints(data, pointAttributes) {
 //	console.log(pointAttributes);
 	
 	// color
-	var colorAttribute = getObject(pointAttributes, "id",
+	var colorAttribute = getObject(lineAttributes, "id",
 	"lineage");
 	
 //	var startColor = colorbrewer.YlOrRd[9][2];
