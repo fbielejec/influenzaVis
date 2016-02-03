@@ -7,12 +7,12 @@
 var lineAttributes;
 var pointAttributes; 
 
-var projection;
+//var projection;
 
 var margin = {
 	top : 20,
 	right : 50,
-	bottom : 50,
+	bottom : 10,
 	left : 200,
 };
 
@@ -86,8 +86,7 @@ function move() {
 
 }// END: move
 
-//d3.json("data/global_swine.H1_height_antig1.json", function ready(error, json) {
-d3.json("data/global_swine_H1.json", function ready(error, json) {
+d3.json("data/global_swine.H1.json", function ready(error, json) {
 
 	lineAttributes = json.lineAttributes;
     pointAttributes = json.pointAttributes;
