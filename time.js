@@ -182,35 +182,37 @@ function update(value, timeScale, currentDateDisplay, dateFormat) {
 	.attr("stroke-dashoffset", 0) //
 	.attr("visibility", "visible");
 
-	// ---POLYGONS---//
+	// ---POINTS---//
 
-	// ---select areas yet to be displayed---//
+	// ---select points yet to be displayed---//
 
-	areasLayer.selectAll(".area") //
+	pointsLayer.selectAll(".point") //
 	.filter(function(d) {
-		var polygon = this;
-		var startDate = formDate(polygon.attributes.startTime.value).getTime();
+		var point = this;
+		var startDate = formDate(point.attributes.startTime.value).getTime();
 
 		return (value < startDate);
 	}) //
 	.transition() //
 	.ease("linear") //
-	.duration(1000) //
-	.attr("visibility", "hidden");
+//	.duration(1000) //
+	.attr("visibility", "hidden")
+	.attr("opacity", 0);
+//
+//	// ---select point displayed now---//
 
-	// ---select polygons displayed now---//
-
-	areasLayer.selectAll(".area") //
+	pointsLayer.selectAll(".point") //
 	.filter(function(d) {
-		var polygon = this;
-		var startDate = formDate(polygon.attributes.startTime.value).getTime();
+		var point = this;
+		var startDate = formDate(point.attributes.startTime.value).getTime();
 
 		return (value >= startDate);
 	}) //
 	.transition() //
 	.ease("linear") //
-//	.duration(1000) //
-	.attr("visibility", "visible");
+//	.duration(500) //
+	.attr("visibility", "visible") //
+	.attr("opacity", 1);
 	
 }// END: update
 

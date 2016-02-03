@@ -17,11 +17,14 @@ function generateLines(data, points) {
 
 	svg.append("g")
 	  .attr("class", "linesLegend")
-	.attr("transform", "translate(" + (width) + "," + (0 + 50) + ")");
+	.attr("transform", "translate(" + (width + 20 ) + "," + (0 + 70) + ")");
 	
 	
 	var legendLinear = d3.legend.color()
-	  .shapeWidth(30)
+//	  .shapeWidth(30)
+	.shapeRadius(5)
+	.shapePadding(10)
+	   .shape('circle')
 	    .cells(5)
 	  .orient('vertical')
 	    .title(capitalizeFirstLetter(colorAttribute.id))
