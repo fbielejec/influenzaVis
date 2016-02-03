@@ -24,15 +24,30 @@
 
 <!-- css -->
 <style type="text/css">
-.axis path, .axis line {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
-}
+/* .axis path, .axis line { */
+/*     fill: none; */
+/*     stroke: #000; */
+/*     shape-rendering: crispEdges; */
+/* } */
 
-.x.axis path {
-    display: none;
-}
+/* .x.axis path { */
+/*     display: none; */
+/* } */
+
+
+  .axis path,
+  .axis line{
+    fill: none;
+    stroke: black;
+  }
+
+  .tick text{
+    font-size: 12px;
+  }
+
+  .tick line{
+    opacity: 0.2;
+  }
 
 #timeSlider {
 	margin-left: 80px;
