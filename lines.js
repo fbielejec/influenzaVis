@@ -150,7 +150,7 @@ function generateLines(data, points) {
 			.attr("stroke-linejoin", "round")
 			//
 			.attr("stroke", function(d) {
-				return (colorscale(+d.attributes.height) );
+				return (colorscale(d.attributes.lineage) );
 			})
 			//
 			.attr("startTime", function(d) {
