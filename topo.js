@@ -5,8 +5,9 @@
 function generateEmptyLayer(pointAttributes, axisAttributes) {
 
 	var xlim = getObject(pointAttributes, "id", axisAttributes.xCoordinate).range;
-	xlim = [ xlim[0] - 2, xlim[1] + 2 ];
+//	xlim = [ xlim[0] - 2, xlim[1] + 2 ];
 
+//	https://stackoverflow.com/questions/31202802/how-to-use-the-same-scale-on-the-y-as-the-x-but-smaller-because-of-the-size-diff
 	
 	var ylim = getObject(pointAttributes, "id", axisAttributes.yCoordinate).range;
 	ylim = [ ylim[0] - 2, ylim[1] + 2 ];
@@ -49,7 +50,7 @@ function generateEmptyLayer(pointAttributes, axisAttributes) {
 	}).remove();
 
 	// y axis (domain is swapped because of reverse coordinate order)
-	var yScale = d3.scale.linear().domain(xlim).range([ height, 0 ]);
+	var yScale = d3.scale.linear().domain(ylim).nice().range([ height, 0 ]);
 
 	var yAxis = d3.svg.axis().scale(yScale).orient("right");
 
@@ -99,4 +100,41 @@ function generateEmptyLayer(pointAttributes, axisAttributes) {
 					height / 2 + (bounds[0][0] + bounds[0][1]) / 2
 							* currentXDifference ]).scale(scale);
 
+	
+	
+	
+	
+	
+	// graticules
+	var graticule = d3.geo.graticule();
+	
+	path = d3.geo.path().projection(projection);
+
+	svg.append("path").datum(graticule).attr("class", "graticule").attr("d",
+			path);
+	
+	// apply inline style
+	svg.selectAll('.graticule').style({
+		'stroke' : '#bbb',
+		'fill' : 'none',
+		'stroke-width' : '.5px',
+			'stroke-opacity' : '.5'
+	});
+	
+	
+//	svg.selectAll('text')
+//	.data(graticule.lines())
+//		.enter().append("text")
+//		.text(function(d) {
+//				if ((d.coordinates[0][0] == d.coordinates[1][0]) && (d.coordinates[0][0] % 30 == 0)) {return (d.coordinates[0][0]);}
+//				else if (d.coordinates[0][1] == d.coordinates[1][1]) {return (d.coordinates[0][1]);}
+//			})
+//		.attr("class","label")
+//		.attr("style", function(d) { return (d.coordinates[0][1] == d.coordinates[1][1]) ? "text-anchor: end" : "text-anchor: middle"; })
+//		.attr("dx", function(d) { return (d.coordinates[0][1] == d.coordinates[1][1]) ? -10 : 0; })
+//		.attr("dy", function(d) { return (d.coordinates[0][1] == d.coordinates[1][1]) ? 4 : 10; })
+//		.attr('transform', function(d) {
+//			return ('translate(' + projection(d.coordinates[0])[0] + ',' + projection(d.coordinates[0])[1] + ')');
+//		});
+	
 }// END: generateEmptyLayer
