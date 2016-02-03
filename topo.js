@@ -59,9 +59,11 @@ function generateEmptyLayer(pointAttributes, axisAttributes) {
 	g.append("text") //
 	.attr("class", "y label") //
 	.attr("text-anchor", "middle") //
+//	.attr("x", 0).attr("y", width / 2)
+//	.attr("transform","rotate(-90)")
 	.attr(
 			"transform",
-			"translate(" + (0 + margin.left - 10) + "," + (height / 2)
+			"translate(" + ( 40 ) + "," + (height / 2)
 					+ ")rotate(-90)") //
 	.style("font-size", "18px") //
 	.style({

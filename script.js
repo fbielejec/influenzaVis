@@ -13,7 +13,7 @@ var margin = {
 	top : 20,
 	right : 50,
 	bottom : 50,
-	left : 50,
+	left : 200,
 };
 
 var padding  = {
@@ -21,7 +21,7 @@ var padding  = {
 		right : 10
 };
 
-var width = 900 - margin.left - margin.right;
+var width = 1100 - margin.left - margin.right;
 var height = 900 - margin.top - margin.bottom;
 
 var minScaleExtent = 1;//0.7;
@@ -110,8 +110,8 @@ d3.json("data/global_swine_H1.json", function ready(error, json) {
 	var axisAttributes = json.axisAttributes;
 	generateEmptyLayer(pointAttributes, axisAttributes);
 
-	var areas = json.layers[0].areas;
-		generateAreas(areas);
+//	var areas = json.layers[0].areas;
+//		generateAreas(areas);
 	
 	var points = json.layers[0].points;
 	generatePoints(points);
