@@ -134,14 +134,14 @@ function update(value, timeScale, currentDateDisplay, dateFormat) {
 
 					offset = map(timePassed, 0, duration, 0, totalLength);
 
-					if (d.westofsource) {
-
-						offset = offset + totalLength;
-
-					} else {
+//					if (d.westofsource) {
+//
+//						offset = offset + totalLength;
+//
+//					} else {
 
 						offset = totalLength - offset;
-					}
+//					}
 
 				}// END: instantaneous line check
 
